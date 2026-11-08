@@ -1,13 +1,31 @@
+import { timingSafeEqual } from "node:crypto";
 import { streamText, stepCountIs, tool, convertToModelMessages } from "ai";
 import { z } from "zod";
 import { getModel, type ProviderId } from "@/lib/ai";
 import { createWorkspace, listFiles, readFile, writeFile, runCommand } from "@/lib/sandbox";
+
 export const runtime = "nodejs";
 export const maxDuration = 300;
 const providers = ["openai", "anthropic", "google", "openrouter"] as const;
+
+function hasValidAccess(request: Request) {
+  const expected = process.env.APP_ACCESS_PASSWORD;
+  if (!expected) return false;
+  const supplied = request.headers.get("x-suprisecode-access") || "";
+  const a = Buffer.from(expected);
+  const b = Buffer.from(supplied);
+  return a.length === b.length && timingSafeEqual(a, b);
+}
+
 export async function POST(request: Request) {
   let sandbox: Awaited<ReturnType<typeof createWorkspace>> | undefined;
   try {
+    if (!process.env.APP_ACCESS_PASSWORD) {
+      return Response.json({ error: "Set APP_ACCESS_PASSWORD in Vercel environment variables before using this deployment." }, { status: 503 });
+    }
+    if (!hasValidAccess(request)) return Response.json({ error: "Access password is missing or incorrect." }, { status: 401 });
+    const length = Number(request.headers.get("content-length") || 0);
+    if (length > 1_000_000) return Response.json({ error: "Request is too large." }, { status: 413 });
     const body = await request.json();
     const provider = providers.includes(body.provider) ? body.provider as ProviderId : "openai";
     const model = typeof body.model === "string" ? body.model.slice(0, 100) : undefined;
