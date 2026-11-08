@@ -9,7 +9,7 @@ const features = [
 
 export default function Home() {
   return <main className="site-wrap">
-    <nav className="site-nav"><Link className="site-brand" href="/">✳ SupriseCode</Link><div><Link href="/docs">Documentation</Link><Link href="/download">Download</Link><a href="https://github.com/Fiesta1862/SupriseCode">GitHub ↗</a></div></nav>
+    <nav className="site-nav"><Link className="site-brand" href="/"><img className="brand-icon" src="/suprisecode-mark.svg" alt="" /> SupriseCode</Link><div><Link href="/docs">Documentation</Link><Link href="/download">Download</Link><a href="https://github.com/Fiesta1862/SupriseCode">GitHub ↗</a></div></nav>
     <section className="site-hero">
       <span className="site-kicker">OPEN-SOURCE AI CODING AGENT</span>
       <h1>Your coding workspace.<br/><span>Now on Android.</span></h1>
