@@ -1,0 +1,14 @@
+{
+  "id": "/",
+  "name": "SupriseCode — AI coding workspace",
+  "short_name": "SupriseCode",
+  "description": "Remote AI coding agent workspace",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#090b10",
+  "theme_color": "#090b10",
+  "icons": [
+    { "src": "/suprisecode-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
