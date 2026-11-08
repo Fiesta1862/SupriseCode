@@ -1,0 +1,10 @@
+{
+  "name": "@suprisecode/cli",
+  "version": "0.1.0",
+  "description": "SupriseCode remote AI coding agent CLI",
+  "license": "MIT",
+  "type": "module",
+  "bin": { "suprisecode": "./bin/suprisecode.js" },
+  "engines": { "node": ">=22" },
+  "files": ["bin", "README.md"]
+}
