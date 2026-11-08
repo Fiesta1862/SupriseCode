@@ -1,1 +1,4 @@
-<resources><color name="ic_launcher_background">#0B0D12</color></resources>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#0B0D12" />
+    <corners android:radius="24dp" />
+</shape>
