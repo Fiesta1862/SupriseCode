@@ -1,0 +1,14 @@
+pkgname=suprisecode-cli
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="SupriseCode remote AI coding agent CLI"
+arch=('any')
+url="https://suprisecode.vercel.app"
+license=('MIT')
+depends=('nodejs' 'npm')
+source=("https://registry.npmjs.org/@suprisecode/cli/-/cli-${pkgver}.tgz")
+sha256sums=('SKIP')
+
+package() {
+  npm install --global --prefix "$pkgdir/usr" "$srcdir/cli-${pkgver}.tgz"
+}
